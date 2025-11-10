@@ -1,0 +1,22 @@
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  font-family: Arial, sans-serif;
+}
+
+/* Quay lại CSS đơn giản ban đầu cho Canvas */
+#gameCanvas {
+  background-color: white;
+  border: 2px solid #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Không cần CSS cho video nữa */
