@@ -80,7 +80,7 @@ h1 {
   /* Khoảng cách giữa các nút */
 }
 
-#controls button:active {
+#controls button:actgit sive {
   background-color: #495057;
   /* Màu tối hơn khi bấm */
   transform: translateY(2px);
