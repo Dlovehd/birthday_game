@@ -1,0 +1,83 @@
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  /* Chặn double-tap để zoom trên mobile */
+  touch-action: manipulation;
+}
+
+h1 {
+  font-family: Arial, sans-serif;
+}
+
+/* CẬP NHẬT: Vỏ bọc game */
+#gameContainer {
+  position: relative;
+  /* Đây là chìa khóa để xếp lớp */
+  width: 100%;
+  /* Chiếm 100% chiều rộng */
+  max-width: 800px;
+  /* Nhưng không to quá 800px */
+  border: 2px solid #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* CẬP NHẬT: Canvas co dãn */
+#gameCanvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Xóa khoảng trống thừa bên dưới */
+}
+
+/* MỚI: Tạo kiểu cho các nút bấm */
+#gameContainer button {
+  position: absolute;
+  /* Đặt nút bấm LÊN TRÊN canvas */
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  /* Chữ to, dễ bấm */
+  font-weight: bold;
+  padding: 15px 20px;
+  opacity: 0.7;
+  /* Hơi mờ để thấy game */
+  cursor: pointer;
+
+  /* Chặn highlight màu xanh khi bấm trên mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+
+#gameContainer button:active {
+  opacity: 1.0;
+  /* Sáng lên khi bấm */
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Vị trí các nút */
+#jumpButton {
+  bottom: 15px;
+  left: 15px;
+}
+
+#shootButton {
+  bottom: 15px;
+  right: 15px;
+}
+
+#rageButton {
+  top: 15px;
+  right: 15px;
+  background-color: rgba(200, 0, 0, 0.7);
+  /* Màu đỏ */
+  display: none;
+  /* Ẩn đi, chỉ hiện khi nộ đầy */
+}
