@@ -2,29 +2,34 @@ body {
   background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
+  /* Sắp xếp theo chiều dọc: Tiêu đề -> Game -> Nút */
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  /* Đảm bảo đủ chiều cao cho cả màn hình */
   margin: 0;
   font-family: Arial, sans-serif;
-  /* Chặn double-tap để zoom trên mobile */
   touch-action: manipulation;
+  padding: 10px;
+  /* Thêm khoảng đệm tổng thể */
+  box-sizing: border-box;
+  /* Tính cả padding vào kích thước */
 }
 
 h1 {
   font-family: Arial, sans-serif;
+  margin-bottom: 10px;
+  /* Khoảng cách với game */
 }
 
-/* CẬP NHẬT: Vỏ bọc game */
 #gameContainer {
   position: relative;
-  /* Đây là chìa khóa để xếp lớp */
+  /* Giữ nguyên, để các nút con có thể dùng absolute */
   width: 100%;
-  /* Chiếm 100% chiều rộng */
   max-width: 800px;
-  /* Nhưng không to quá 800px */
-  border: 2px solid #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Thay đổi: border và shadow sẽ áp dụng cho canvas */
+  /* background-color: white; */
+  /* Để canvas tự lo nền */
 }
 
 /* CẬP NHẬT: Canvas co dãn */
@@ -32,52 +37,107 @@ h1 {
   width: 100%;
   height: auto;
   display: block;
-  /* Xóa khoảng trống thừa bên dưới */
+  border: 2px solid #333;
+  /* border và shadow cho canvas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* MỚI: Tạo kiểu cho các nút bấm */
-#gameContainer button {
-  position: absolute;
-  /* Đặt nút bấm LÊN TRÊN canvas */
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.4);
+/* MỚI: Thêm một container cho các nút bấm để định vị chúng dễ hơn */
+#controls {
+  display: flex;
+  /* Dùng flexbox để sắp xếp nút */
+  justify-content: space-between;
+  /* Đẩy nút ra hai bên */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  width: 100%;
+  max-width: 800px;
+  /* Đồng bộ với chiều rộng gameContainer */
+  margin-top: 15px;
+  /* Khoảng cách giữa canvas và nút */
+  padding: 0 10px;
+  /* Thêm padding nếu cần */
+  box-sizing: border-box;
+}
+
+/* MỚI: Định kiểu chung cho các nút */
+#controls button {
+  background-color: #6c757d;
+  /* Màu xám hiện đại */
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
-  font-size: 1.5rem;
-  /* Chữ to, dễ bấm */
+  border: none;
+  /* Bỏ viền */
+  border-radius: 8px;
+  /* Bo tròn vừa phải */
+  font-size: 1.2rem;
+  /* Kích thước chữ tốt hơn cho mobile */
   font-weight: bold;
-  padding: 15px 20px;
-  opacity: 0.7;
-  /* Hơi mờ để thấy game */
+  padding: 12px 25px;
+  /* Kích thước nút vừa tay hơn */
   cursor: pointer;
-
-  /* Chặn highlight màu xanh khi bấm trên mobile */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  /* Hiệu ứng chuyển động */
   -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  /* Ngăn nút bị co lại */
 }
 
-#gameContainer button:active {
-  opacity: 1.0;
-  /* Sáng lên khi bấm */
-  background-color: rgba(0, 0, 0, 0.6);
+#controls button:active {
+  background-color: #495057;
+  /* Màu tối hơn khi bấm */
+  transform: translateY(2px);
+  /* Hiệu ứng nhấn xuống */
 }
 
-/* Vị trí các nút */
-#jumpButton {
-  bottom: 15px;
-  left: 15px;
-}
-
-#shootButton {
-  bottom: 15px;
-  right: 15px;
-}
-
+/* Màu riêng cho nút NỘ */
 #rageButton {
-  top: 15px;
-  right: 15px;
-  background-color: rgba(200, 0, 0, 0.7);
+  background-color: #dc3545;
   /* Màu đỏ */
+  margin: 0 auto;
+  /* Căn giữa nếu cần */
+  padding: 10px 20px;
+  /* Nhỏ hơn chút */
+  font-size: 1.1rem;
   display: none;
-  /* Ẩn đi, chỉ hiện khi nộ đầy */
+  /* Mặc định ẩn, JS sẽ hiện khi nộ đầy */
+}
+
+#rageButton:active {
+  background-color: #c82333;
+}
+
+/* MỚI: Media Queries để tối ưu cho màn hình nhỏ hơn */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  #controls {
+    flex-wrap: wrap;
+    /* Cho phép nút xuống dòng nếu quá chật */
+    justify-content: center;
+    /* Căn giữa các nút khi xuống dòng */
+    gap: 10px;
+    /* Khoảng cách giữa các nút */
+  }
+
+  #controls button {
+    flex-grow: 1;
+    /* Cho phép nút nở ra một chút nếu có không gian */
+    max-width: 48%;
+    /* Hai nút trên một hàng */
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+
+  #rageButton {
+    flex-grow: unset;
+    /* Nút nộ không nở ra như nút khác */
+    width: auto;
+    /* Kích thước tự động */
+    max-width: 100%;
+    margin-top: 10px;
+    /* Khoảng cách nếu nó xuống hàng */
+  }
 }
