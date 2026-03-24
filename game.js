@@ -22,8 +22,9 @@ const gravity = 1.4;
 let gameSpeed = 5;
 
 // --- CÀI ĐẶT BOSS (dễ điều chỉnh) ---
-const BOSS_SCORE_THRESHOLD = 1000;
-const BOSS_MAX_HEALTH = 2000;
+const BOSS_SCORE_THRESHOLD = 2000;
+const BOSS_MAX_HEALTH = 1000;
+
 
 // --- CÀI ĐẶT KAMEHAMEHA ---
 const KAME_AUDIO_DURATION_MS = 8000; // 8 giây
@@ -32,8 +33,8 @@ const KAMEHAMEHA_BLAST_DURATION_FRAMES = 180; // Chưởng dài 3 giây (3*60)
 const BOSS_DISAPPEAR_DURATION_FRAMES = 120; // Tan biến 2 giây (2*60)
 
 // --- Đường dẫn ảnh nhân vật ---
-const PLAYER_DEFAULT_IMAGE_SRC = 'player.png';
-const PLAYER_CHARGING_IMAGE_SRC = 'player_charging.png';
+const PLAYER_DEFAULT_IMAGE_SRC = 'player_verDuong.png';
+const PLAYER_CHARGING_IMAGE_SRC = 'player_charging_verDuong.png';
 
 // --- Biến trạng thái game ---
 let score = 0;
@@ -293,8 +294,8 @@ class Obstacle {
     this.markedForDeletion = false;
     this.type = 'Type1';
     this.image = new Image();
-    this.image.src = 'obstacle1.png';
-    this.image.onerror = () => console.error("Không thể tải 'obstacle1.png'.");
+    this.image.src = 'obstacle1_verDuong.png';
+    this.image.onerror = () => console.error("Không thể tải 'obstacle1_verDuong.png'.");
   }
   update() {
     this.x -= this.speed;
@@ -323,7 +324,7 @@ class ObstacleType2 {
     this.hasFiredFirstShot = false;
     this.hasFiredSecondShot = false;
     this.image = new Image();
-    this.image.src = 'obstacle2.png';
+    this.image.src = 'obstacle2_verDuong.png';
     this.image.onerror = () => console.error("Không thể tải 'obstacle2.png'.");
   }
   update() {
@@ -439,7 +440,7 @@ class Boss {
     this.maxHealth = BOSS_MAX_HEALTH;
     this.currentHealth = this.maxHealth;
     this.image = new Image();
-    this.image.src = 'boss.png';
+    this.image.src = 'boss_verDuong.png';
 
     this.attackTimer1 = 0;
     this.attackInterval1 = 50;
