@@ -22,8 +22,8 @@ const gravity = 1.4;
 let gameSpeed = 5;
 
 // --- CÀI ĐẶT BOSS (dễ điều chỉnh) ---
-const BOSS_SCORE_THRESHOLD = 2000;
-const BOSS_MAX_HEALTH = 500;
+const BOSS_SCORE_THRESHOLD = 1000;
+const BOSS_MAX_HEALTH = 200;
 
 
 // --- CÀI ĐẶT KAMEHAMEHA ---
